@@ -646,6 +646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 633035560}
   - component: {fileID: 633035561}
+  - component: {fileID: 633035562}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -681,6 +682,33 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &633035562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633035559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c80f8cffdbd8741ac0ad98e0cee022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tetrominoes:
+  - _tetromino: 0
+    _tile: {fileID: 11400000, guid: 5d751abee790f54469ac2372728ec023, type: 2}
+  - _tetromino: 1
+    _tile: {fileID: 11400000, guid: 2e307b3df4e806e4a8dbee1297df9e48, type: 2}
+  - _tetromino: 2
+    _tile: {fileID: 11400000, guid: 480ca52729ce7b145ababdfa66b8a6b4, type: 2}
+  - _tetromino: 3
+    _tile: {fileID: 11400000, guid: 9afadc6164a036d4298960f0bc8e6589, type: 2}
+  - _tetromino: 4
+    _tile: {fileID: 11400000, guid: ec20e3e3c20d55942a0696b3816d5020, type: 2}
+  - _tetromino: 5
+    _tile: {fileID: 11400000, guid: c76cc299bafcd204ca6905364a953a45, type: 2}
+  - _tetromino: 6
+    _tile: {fileID: 11400000, guid: eef2d9cb33273ad43841d2e224748e14, type: 2}
 --- !u!1 &1281115052
 GameObject:
   m_ObjectHideFlags: 0
