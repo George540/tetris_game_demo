@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,7 +13,7 @@ public enum Tetromino
     Z
 }
 
-[System.Serializable]
+[Serializable]
 public struct TetrominoData
 {
     public Tetromino _tetromino;

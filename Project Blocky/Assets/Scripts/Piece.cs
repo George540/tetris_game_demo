@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -10,11 +11,12 @@ public class Piece : MonoBehaviour
     {
         Position = position;
         Data = data;
-        Cells ??= new Vector3Int[Data.Cells.Length];
+        
+        Cells ??= new Vector3Int[data.Cells.Length];
 
-        for (var i = 0; i < Data.Cells.Length; i++)
+        for (var i = 0; i < data.Cells.Length; i++)
         {
-            Cells[i] = (Vector3Int) Data.Cells[i];
+            Cells[i] = (Vector3Int) data.Cells[i];
         }
     }
 }

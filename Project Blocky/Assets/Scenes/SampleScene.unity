@@ -243,7 +243,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.45999998, y: 0.45999998, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -647,6 +647,7 @@ GameObject:
   - component: {fileID: 633035560}
   - component: {fileID: 633035561}
   - component: {fileID: 633035562}
+  - component: {fileID: 633035563}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -694,6 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c80f8cffdbd8741ac0ad98e0cee022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tilemap: {fileID: 201434277}
   _tetrominoes:
   - _tetromino: 0
     _tile: {fileID: 11400000, guid: 5d751abee790f54469ac2372728ec023, type: 2}
@@ -709,6 +711,20 @@ MonoBehaviour:
     _tile: {fileID: 11400000, guid: c76cc299bafcd204ca6905364a953a45, type: 2}
   - _tetromino: 6
     _tile: {fileID: 11400000, guid: eef2d9cb33273ad43841d2e224748e14, type: 2}
+  _currentPiece: {fileID: 633035563}
+  _spawnPosition: {x: -1, y: 8, z: 0}
+--- !u!114 &633035563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633035559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e46b40d4807dd47af27d20e08059a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1281115052
 GameObject:
   m_ObjectHideFlags: 0

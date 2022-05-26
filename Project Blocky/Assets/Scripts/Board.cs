@@ -20,6 +20,8 @@ public class Board : MonoBehaviour
     
     public Tilemap _tilemap;
     public TetrominoData[] _tetrominoes;
+    [SerializeField] private Piece _currentPiece;
+    [SerializeField] private Vector3Int _spawnPosition;
 
     private void Awake()
     {
@@ -43,13 +45,17 @@ public class Board : MonoBehaviour
     {
         var random = Random.Range(0, _tetrominoes.Length);
         var data = _tetrominoes[random];
+        
+        _currentPiece.Initialize(_spawnPosition, data);
+        SetTile(_currentPiece);
     }
 
     public void SetTile(Piece piece)
     {
-        for (int i = 0; i < piece.Cells.Length; i++)
+        foreach (var cell in piece.Cells)
         {
-            var tilePosition = piece.Cells[i];
+            var tilePosition = cell + piece.Position;
+            _tilemap.SetTile(tilePosition, piece.Data._tile);
         }
     }
 }
