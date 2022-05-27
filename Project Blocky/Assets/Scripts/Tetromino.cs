@@ -12,9 +12,10 @@ public class Tetromino : MonoBehaviour
     public void Initialize(TetrominoData data)
     {
         _data = data;
-        foreach (var cell in data.Cells)
+        foreach (var cell in data._cells)
         {
-            Instantiate(data._cellTile, TetrominoPosition + cell, Quaternion.identity, transform);
+            var go = Instantiate(data._cellTile, TetrominoPosition, Quaternion.identity, transform);
+            go.transform.localPosition = cell;
         }
     }
 
