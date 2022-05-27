@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Tetromino _baseTetrominoPrefab;
     [SerializeField] private TetrominoData[] _tetrominoesData;
     private Tetromino _currentTetromino;
-
-    public Vector3Int StartPosition => _startPosition;
+    
     public int DropDistance => _dropDistance;
 
     private void Start()
@@ -42,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         var choice = Random.Range(0,_tetrominoesData.Length);
         _currentTetromino = Instantiate(_baseTetrominoPrefab, _startPosition, Quaternion.identity);
-        _currentTetromino.Initialize(_tetrominoesData[choice]);
+        _currentTetromino.Initialize(_tetrominoesData[choice], _startPosition);
     }
 
     // Update is called once per frame

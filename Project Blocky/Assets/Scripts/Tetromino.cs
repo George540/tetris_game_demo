@@ -9,7 +9,7 @@ public class Tetromino : MonoBehaviour
     public Vector3Int TetrominoPosition { get; set; }
     public TetrominoData _data;
 
-    public void Initialize(TetrominoData data)
+    public void Initialize(TetrominoData data, Vector3Int startPos)
     {
         _data = data;
         foreach (var cell in data._cells)
@@ -17,6 +17,8 @@ public class Tetromino : MonoBehaviour
             var go = Instantiate(data._cellTile, TetrominoPosition, Quaternion.identity, transform);
             go.transform.localPosition = cell;
         }
+
+        TetrominoPosition = startPos;
     }
 
     public void DropTetromino()
