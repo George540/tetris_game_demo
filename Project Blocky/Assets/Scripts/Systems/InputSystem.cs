@@ -9,15 +9,15 @@ public class InputSystem : MonoBehaviour
     
     public void OnMoveRight(InputAction.CallbackContext context)
     {
-        if (_gameManager.CurrentTetromino == null) return;
-
+        if (_gameManager.CurrentTetromino == null || !context.performed) return;
+        
         var tetromino = _gameManager.CurrentTetromino;
         tetromino.MoveRight(_gameManager.MoveDistance);
     }
     
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
-        if (_gameManager.CurrentTetromino == null) return;
+        if (_gameManager.CurrentTetromino == null || !context.performed) return;
 
         var tetromino = _gameManager.CurrentTetromino;
         tetromino.MoveLeft(_gameManager.MoveDistance);

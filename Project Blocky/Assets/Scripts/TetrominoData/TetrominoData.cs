@@ -9,7 +9,7 @@ public class TetrominoData : ScriptableObject
 
     private void OnEnable()
     {
-        _cells = new Vector3Int[Data.Cells.Count];
+        _cells = new Vector3Int[Data.Cells[_tetrominoType].Length];
         for (var i = 0; i < Data.Cells[_tetrominoType].Length; i++)
         {
             _cells[i] = (Vector3Int) Data.Cells[_tetrominoType][i];
