@@ -24,7 +24,7 @@ public class Tetromino : MonoBehaviour
 
     public void DropTetromino(int dropDistance)
     {
-        if (_cellTransforms.ToList().Any(c => c.position.y <= -19)) return;
+        if (_cellTransforms.ToList().Any(c => c.position.y <= Data.BottomWallBoundary)) return;
         
         TetrominoPosition += Vector3Int.down * dropDistance;
         UpdateTransform();
@@ -32,7 +32,7 @@ public class Tetromino : MonoBehaviour
 
     public void MoveRight(int moveDistance)
     {
-        if (_cellTransforms.ToList().Any(c => c.position.x >= 9)) return;
+        if (_cellTransforms.ToList().Any(c => c.position.x >= Data.RightWallBoundary)) return;
         
         TetrominoPosition += Vector3Int.right * moveDistance;
         UpdateTransform();
@@ -40,7 +40,7 @@ public class Tetromino : MonoBehaviour
 
     public void MoveLeft(int moveDistance)
     {
-        if (_cellTransforms.ToList().Any(c => c.position.x <= -9)) return;
+        if (_cellTransforms.ToList().Any(c => c.position.x <= Data.LeftWallBoundary)) return;
         
         TetrominoPosition += Vector3Int.left * moveDistance;
         UpdateTransform();

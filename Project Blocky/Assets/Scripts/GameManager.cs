@@ -16,14 +16,14 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-
+    [SerializeField] private InputSystem _inputSystem;
     [SerializeField, Min(0)] private int _moveDistance;
     [SerializeField] private Vector3Int _startPosition;
-    [SerializeField] private float _moveTimeInterval;
     [SerializeField] private float _timerCountdown;
     [SerializeField] private Tetromino _baseTetrominoPrefab;
     [SerializeField] private TetrominoData[] _tetrominoesData;
     private Tetromino _currentTetromino;
+    private float _moveTimeInterval;
 
     public Tetromino CurrentTetromino => _currentTetromino;
     public int MoveDistance => _moveDistance;
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _timerCountdown = _moveTimeInterval;
+        _moveTimeInterval = Data.SlowMoveTimeDistance;
         CreateTetromino();
     }
 
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ChangeMoveTimeInterval();
         UpdateTimer();
     }
     private void UpdateTimer()
@@ -54,5 +56,10 @@ public class GameManager : MonoBehaviour
             _timerCountdown = _moveTimeInterval;
         }
         _timerCountdown -= Time.deltaTime;
+    }
+
+    private void ChangeMoveTimeInterval()
+    {
+        _moveTimeInterval = _inputSystem.IsDroppingFast ? Data.FastMoveTimeDistance : Data.SlowMoveTimeDistance;
     }
 }
