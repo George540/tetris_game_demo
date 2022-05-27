@@ -21,15 +21,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField, Min(0)] private int _dropDistance;
+    [SerializeField, Min(0)] private int _moveDistance;
     [SerializeField] private Vector3Int _startPosition;
     [SerializeField] private float _moveTimeInterval;
     [SerializeField] private float _timerCountdown;
     [SerializeField] private Tetromino _baseTetrominoPrefab;
     [SerializeField] private TetrominoData[] _tetrominoesData;
     private Tetromino _currentTetromino;
-    
-    public int DropDistance => _dropDistance;
+
+    public Tetromino CurrentTetromino => _currentTetromino;
+    public int MoveDistance => _moveDistance;
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void CreateTetromino()
     {
-        var choice = Random.Range(0,_tetrominoesData.Length);
+        var choice = Random.Range(0, _tetrominoesData.Length);
         _currentTetromino = Instantiate(_baseTetrominoPrefab, _startPosition, Quaternion.identity);
         _currentTetromino.Initialize(_tetrominoesData[choice], _startPosition);
     }
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         if (_timerCountdown < 0)
         {
-            _currentTetromino.DropTetromino();
+            _currentTetromino.DropTetromino(_moveDistance);
             _timerCountdown = _moveTimeInterval;
         }
         _timerCountdown -= Time.deltaTime;

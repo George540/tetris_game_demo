@@ -21,9 +21,27 @@ public class Tetromino : MonoBehaviour
         TetrominoPosition = startPos;
     }
 
-    public void DropTetromino()
+    public void DropTetromino(int dropDistance)
     {
-        TetrominoPosition += Vector3Int.down * GameManager.Instance.DropDistance;
+        TetrominoPosition += Vector3Int.down * dropDistance;
+        UpdateTransform();
+    }
+
+    public void MoveRight(int moveDistance)
+    {
+        TetrominoPosition += Vector3Int.right * moveDistance;
+        UpdateTransform();
+    }
+
+    public void MoveLeft(int moveDistance)
+    {
+        TetrominoPosition += Vector3Int.left * moveDistance;
+        UpdateTransform();
+    }
+
+    private void UpdateTransform()
+    {
         transform.position = TetrominoPosition;
+        ;
     }
 }
