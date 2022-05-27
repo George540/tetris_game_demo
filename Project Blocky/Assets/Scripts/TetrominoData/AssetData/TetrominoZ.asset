@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b73ea5aa02c2e4fae5e35df40dbfe7, type: 3}
   m_Name: TetrominoZ
   m_EditorClassIdentifier: 
-  _tetrominoType: 5
-  _cellTile: {fileID: 3072828636265231744, guid: 979a0595c84221b4aa68eb34278063bf, type: 3}
+  _tetrominoType: 6
+  _cellTile: {fileID: 3072828636265231744, guid: 2efb96ba04b3d1f4f9d08756b7ec9571, type: 3}
+  _cells:
+  - {x: -2, y: 2, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}

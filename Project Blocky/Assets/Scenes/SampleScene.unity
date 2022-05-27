@@ -554,7 +554,13 @@ MonoBehaviour:
   _timerCountdown: 0
   _baseTetrominoPrefab: {fileID: 7054196730689949931, guid: 3365d70b8b0c773469fa649d5ded71af, type: 3}
   _tetrominoesData:
-  - {fileID: 11400000, guid: 27b70021db3fbd845888651621497dfb, type: 2}
+  - {fileID: 11400000, guid: e04ed9dd1b072c745a21703f65395f0e, type: 2}
+  - {fileID: 11400000, guid: f93e4af57d32ab840b26afb2337a235f, type: 2}
+  - {fileID: 11400000, guid: a8655b63a032704478217d35d555dd76, type: 2}
+  - {fileID: 11400000, guid: 889d44cf48ffd32459071e7774fcf363, type: 2}
+  - {fileID: 11400000, guid: ec583940b8eb2f641a190b40c932e651, type: 2}
+  - {fileID: 11400000, guid: e27abb128eda29742a1a7e7e825c9194, type: 2}
+  - {fileID: 11400000, guid: b0c179df2879ba64f88bf3953af4acdd, type: 2}
 --- !u!4 &1829510252
 Transform:
   m_ObjectHideFlags: 0
