@@ -27,6 +27,8 @@ public class Tetromino : MonoBehaviour
 
     public void DropTetromino(int dropDistance)
     {
+        if (_cellTransforms.ToList().Any(c => c.position.y <= -19)) return;
+        
         TetrominoPosition += Vector3Int.down * dropDistance;
         UpdateTransform();
     }
