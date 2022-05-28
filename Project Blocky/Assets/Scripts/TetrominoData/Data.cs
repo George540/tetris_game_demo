@@ -6,11 +6,6 @@ public enum TetrominoType
     I, J, L, O, S, T, Z
 }
 
-public enum NeighbourType
-{
-    Bottom, Left, Right
-}
-
 public static class Data
 {
     public const int LeftWallBoundary = -9;

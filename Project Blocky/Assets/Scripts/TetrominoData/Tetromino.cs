@@ -80,13 +80,19 @@ public class Tetromino : MonoBehaviour
 
     private void RestTetromino()
     {
+        var yPos = new int[_cellTransforms.Length];
+        var i = 0;
         foreach (var cell in _cellTransforms)
         {
             cell.parent = _gameManager.RestedCellsSystem.transform;
-            _gameManager.RestedCellsSystem.OccupyGrid(Vector3Int.FloorToInt(cell.position), cell.gameObject);
+            var position = Vector3Int.FloorToInt(cell.position);
+            _gameManager.RestedCellsSystem.OccupyGrid(position, cell.gameObject);
+            yPos[i] = position.y;
+            i++;
         }
 
         _cellTransforms = null;
+        _gameManager.RestedCellsSystem.EraseRows(yPos);
         _gameManager.CreateTetromino();
         Destroy(gameObject);
     }
@@ -95,7 +101,6 @@ public class Tetromino : MonoBehaviour
     {
         transform.position = TetrominoPosition;
     }
-
     
     private bool HasNeighbouringDownCell(Transform cell, int maxDistance)
     {
