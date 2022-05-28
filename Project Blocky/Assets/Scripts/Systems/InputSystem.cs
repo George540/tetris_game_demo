@@ -40,4 +40,15 @@ public class InputSystem : MonoBehaviour
             _isDroppingFast = false;
         }
     }
+
+    // ReSharper disable once UnusedMember.Global
+    public void OnRotate(InputAction.CallbackContext context)
+    {
+        if (_gameManager.CurrentTetromino == null) return;
+        if (context.performed)
+        {
+            var tetromino = _gameManager.CurrentTetromino;
+            tetromino.Rotate();
+        }
+    }
 }

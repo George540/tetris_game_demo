@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         CreateTetromino();
     }
 
-    void CreateTetromino()
+    public void CreateTetromino()
     {
         var choice = Random.Range(0, _tetrominoesData.Length);
         _currentTetromino = Instantiate(_baseTetrominoPrefab, _startPosition, Quaternion.identity);

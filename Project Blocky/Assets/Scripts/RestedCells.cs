@@ -1,22 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RestedCells : MonoBehaviour
 {
-    private Dictionary<int, List<Transform>> _restedCellsCollection = new()
-    {
-        {-9, new List<Transform>()}, {-7, new List<Transform>()},
-        {-5, new List<Transform>()}, {-3, new List<Transform>()},
-        {-1, new List<Transform>()}, {1, new List<Transform>()},
-        {3, new List<Transform>()}, {5, new List<Transform>()},
-        {7, new List<Transform>()}, {9, new List<Transform>()},
-        {11, new List<Transform>()}, {13, new List<Transform>()},
-        {15, new List<Transform>()}, {17, new List<Transform>()}
-    };
+    public GameObject _sampleCell;
+    private Dictionary<Vector3Int, GameObject> _restedCellsCollection = new Dictionary<Vector3Int, GameObject>();
 
-    public Dictionary<int, List<Transform>> RestedCellsCollection => _restedCellsCollection;
+    public Dictionary<Vector3Int, GameObject> RestedCellsCollection => _restedCellsCollection;
     
     // Start is called before the first frame update
     void Start()
@@ -30,9 +20,10 @@ public class RestedCells : MonoBehaviour
         
     }
 
-    public void AddCell(int column, Transform cellTransform)
+    public void OccupyGrid(Vector3Int pos, GameObject go)
     {
-        _restedCellsCollection[column].Add(cellTransform);
+        _restedCellsCollection[pos] = go;
+        Instantiate(_sampleCell, go.transform.position, Quaternion.identity);
     }
 
     public void EraseRows()

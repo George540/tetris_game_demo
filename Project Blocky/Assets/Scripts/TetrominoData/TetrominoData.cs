@@ -6,6 +6,7 @@ public class TetrominoData : ScriptableObject
     public TetrominoType _tetrominoType;
     public GameObject _cellTile;
     public Vector3Int[] _cells;
+    public bool _hasRotation;
 
     private void OnEnable()
     {

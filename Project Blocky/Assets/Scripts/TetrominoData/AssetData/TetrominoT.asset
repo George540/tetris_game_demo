@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tetrominoType: 5
   _cellTile: {fileID: 3072828636265231744, guid: 979a0595c84221b4aa68eb34278063bf, type: 3}
+  _cells:
+  - {x: -2, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 0, y: 2, z: 0}
+  _hasRotation: 1

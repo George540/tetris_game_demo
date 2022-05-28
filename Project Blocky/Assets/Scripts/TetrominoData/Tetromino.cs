@@ -29,22 +29,13 @@ public class Tetromino : MonoBehaviour
 
     public void DropTetromino(int dropDistance)
     {
-        if (_cellTransforms.ToList().Any(c => c.position.y <= Data.BottomWallBoundary))
+        if (_cellTransforms.Any(c => HasNeighbouringDownCell(c, dropDistance)) ||
+            _cellTransforms.ToList().Any(c => c.position.y <= Data.BottomWallBoundary))
         {
             RestTetromino();
             return;
         }
-        
-        foreach (var cell in _cellTransforms)
-        {
-            if (_gameManager.RestedCellsSystem.RestedCellsCollection[(int) cell.position.x].Count > 0 &&
-                _gameManager.RestedCellsSystem.RestedCellsCollection[(int) cell.position.x].Last().position.y + 2 >= cell.position.y)
-            {
-                RestTetromino();
-                return;
-            }
-        }
-        
+
         TetrominoPosition += Vector3Int.down * dropDistance;
         UpdateTransform();
     }
@@ -53,6 +44,11 @@ public class Tetromino : MonoBehaviour
     {
         if (_cellTransforms.ToList().Any(c => c.position.x >= Data.RightWallBoundary)) return;
         
+        if (_cellTransforms.Any(c => HasNeighbouringRightCell(c, moveDistance)))
+        {
+            return;
+        }
+
         TetrominoPosition += Vector3Int.right * moveDistance;
         UpdateTransform();
     }
@@ -61,8 +57,25 @@ public class Tetromino : MonoBehaviour
     {
         if (_cellTransforms.ToList().Any(c => c.position.x <= Data.LeftWallBoundary)) return;
         
+        if (_cellTransforms.Any(c => HasNeighbouringLeftCell(c, moveDistance)))
+        {
+            return;
+        }
+        
         TetrominoPosition += Vector3Int.left * moveDistance;
         UpdateTransform();
+    }
+
+    public void Rotate()
+    {
+        if (_data._hasRotation)
+        {
+            transform.Rotate(Vector3.forward, 90f);
+            foreach (var cell in _cellTransforms)
+            {
+                cell.Rotate(Vector3.back, 90f);
+            }
+        }
     }
 
     private void RestTetromino()
@@ -70,15 +83,47 @@ public class Tetromino : MonoBehaviour
         foreach (var cell in _cellTransforms)
         {
             cell.parent = _gameManager.RestedCellsSystem.transform;
-            _gameManager.RestedCellsSystem.AddCell((int) cell.position.x, cell);
+            _gameManager.RestedCellsSystem.OccupyGrid(Vector3Int.FloorToInt(cell.position), cell.gameObject);
         }
 
         _cellTransforms = null;
+        _gameManager.CreateTetromino();
         Destroy(gameObject);
     }
 
     private void UpdateTransform()
     {
         transform.position = TetrominoPosition;
+    }
+
+    
+    private bool HasNeighbouringDownCell(Transform cell, int maxDistance)
+    {
+        var restedCells = _gameManager.RestedCellsSystem.RestedCellsCollection;
+        var cellPosition = cell.position;
+        var key = Vector3Int.CeilToInt(cellPosition) + Vector3Int.down * maxDistance;
+        return restedCells.ContainsKey(key) &&
+               restedCells.TryGetValue(key, out var closeCell) &&
+               closeCell.transform.position.y + maxDistance >= cellPosition.y;
+    }
+    
+    private bool HasNeighbouringRightCell(Transform cell, int maxDistance)
+    {
+        var restedCells = _gameManager.RestedCellsSystem.RestedCellsCollection;
+        var cellPosition = cell.position;
+        var key = Vector3Int.FloorToInt(cellPosition) + Vector3Int.right * maxDistance;
+        return restedCells.ContainsKey(key) &&
+               restedCells.TryGetValue(key, out var closeCell) &&
+               closeCell.transform.position.x - maxDistance <= cellPosition.x;
+    }
+    
+    private bool HasNeighbouringLeftCell(Transform cell, int maxDistance)
+    {
+        var restedCells = _gameManager.RestedCellsSystem.RestedCellsCollection;
+        var cellPosition = cell.position;
+        var key = Vector3Int.FloorToInt(cellPosition) + Vector3Int.left * maxDistance;
+        return restedCells.ContainsKey(key) &&
+               restedCells.TryGetValue(key, out var closeCell) &&
+               closeCell.transform.position.x + maxDistance >= cellPosition.x;
     }
 }
