@@ -2,21 +2,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-            }
-
-            return _instance;
-        }
-    }
     [SerializeField] private InputSystem _inputSystem;
+    [SerializeField] private RestedCells _restedCellsSystem;
+    
     [SerializeField, Min(0)] private int _moveDistance;
     [SerializeField] private Vector3Int _startPosition;
     [SerializeField] private float _timerCountdown;
@@ -25,6 +13,7 @@ public class GameManager : MonoBehaviour
     private Tetromino _currentTetromino;
     private float _moveTimeInterval;
 
+    public RestedCells RestedCellsSystem => _restedCellsSystem;
     public Tetromino CurrentTetromino => _currentTetromino;
     public int MoveDistance => _moveDistance;
 
@@ -39,12 +28,16 @@ public class GameManager : MonoBehaviour
     {
         var choice = Random.Range(0, _tetrominoesData.Length);
         _currentTetromino = Instantiate(_baseTetrominoPrefab, _startPosition, Quaternion.identity);
-        _currentTetromino.Initialize(_tetrominoesData[choice], _startPosition);
+        _currentTetromino.Initialize(this, _tetrominoesData[choice], _startPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_currentTetromino == null)
+        {
+            CreateTetromino();
+        }
         ChangeMoveTimeInterval();
         UpdateTimer();
     }
@@ -52,7 +45,10 @@ public class GameManager : MonoBehaviour
     {
         if (_timerCountdown < 0)
         {
-            _currentTetromino.DropTetromino(_moveDistance);
+            if (_currentTetromino != null && !_currentTetromino.IsRested)
+            {
+                _currentTetromino.DropTetromino(_moveDistance);
+            }
             _timerCountdown = _moveTimeInterval;
         }
         _timerCountdown -= Time.deltaTime;
