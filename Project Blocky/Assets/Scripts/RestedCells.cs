@@ -15,6 +15,12 @@ public class RestedCells : MonoBehaviour
         //Instantiate(_sampleCell, go.transform.position, Quaternion.identity);
     }
 
+    private void RemoveFromGrid(Vector3Int pos)
+    {
+        _restedCellsCollection[pos] = null;
+        _restedCellsCollection.Remove(pos);
+    }
+
     public void EraseRows(int[] yPositions)
     {
         var uniqueYPos = yPositions.ToList().Distinct().OrderBy(x => x).ToList();
@@ -31,8 +37,7 @@ public class RestedCells : MonoBehaviour
                     if (_restedCellsCollection.ContainsKey(yKey) || _restedCellsCollection[yKey] != null)
                     {
                         Destroy(_restedCellsCollection[yKey]);
-                        _restedCellsCollection[yKey] = null;
-                        _restedCellsCollection.Remove(yKey);
+                        RemoveFromGrid(yKey);
                     }
                 }
                 rowsDeleted++;
@@ -42,6 +47,11 @@ public class RestedCells : MonoBehaviour
         
         if (rowsDeleted == 0 || lastRowDeleted == 0) return;
         
+        DropUpperCells(rowsDeleted, lastRowDeleted);
+    }
+
+    private void DropUpperCells(int rowsDeleted, int lastRowDeleted)
+    {
         var keyValuePairsAbove = _restedCellsCollection.ToList().FindAll(k => k.Key.y > lastRowDeleted);
         keyValuePairsAbove = keyValuePairsAbove.OrderBy(k => k.Key.y).ToList();
         
@@ -54,13 +64,7 @@ public class RestedCells : MonoBehaviour
             var newKey = oldKey - decrementVector;
             cellObject.transform.position -= decrementVector;
             _restedCellsCollection[newKey] = cellObject;
-            _restedCellsCollection[oldKey] = null;
-            _restedCellsCollection.Remove(oldKey);
+            RemoveFromGrid(oldKey);
         }
-    }
-
-    private void DropUpperCells()
-    {
-        
     }
 }
