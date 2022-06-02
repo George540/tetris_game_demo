@@ -17,14 +17,13 @@ public class Tetromino : MonoBehaviour
         _gameManager = manager;
         _data = data;
         _cellTransforms ??= new Transform[_data._cells.Length];
+        TetrominoPosition = startPos;
         for (var i = 0; i < data._cells.Length; i++)
         {
             var go = Instantiate(data._cellTile, TetrominoPosition, Quaternion.identity, transform);
             go.transform.localPosition = data._cells[i];
             _cellTransforms[i] = go.transform;
         }
-
-        TetrominoPosition = startPos;
     }
 
     public void DropTetromino(int dropDistance)

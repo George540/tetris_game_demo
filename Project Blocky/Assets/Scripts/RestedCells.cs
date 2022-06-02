@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class RestedCells : MonoBehaviour
@@ -18,20 +17,50 @@ public class RestedCells : MonoBehaviour
 
     public void EraseRows(int[] yPositions)
     {
-        var uniqueYPos = yPositions.ToList().Distinct().OrderBy(x => x);
-        const int gridsPerRow = (Data.RightWallBoundary - Data.RightWallBoundary) / 2 + 1;
+        var uniqueYPos = yPositions.ToList().Distinct().OrderBy(x => x).ToList();
+
+        var rowsDeleted = 0;
+        var lastRowDeleted = 0;
         foreach (var yPos in uniqueYPos)
         {
             var yKeys = _restedCellsCollection.Keys.ToList().FindAll(k => k.y == yPos);
-            if (yKeys.Count == 10)
+            if (yKeys.Count == Data.gridsPerRow)
             {
                 foreach (var yKey in yKeys)
                 {
-                    /*Destroy(_restedCellsCollection[yKey]);
-                    _restedCellsCollection.Remove(yKey);*/
-                    Instantiate(_sampleCell, yKey, quaternion.identity);
+                    if (_restedCellsCollection.ContainsKey(yKey) || _restedCellsCollection[yKey] != null)
+                    {
+                        Destroy(_restedCellsCollection[yKey]);
+                        _restedCellsCollection[yKey] = null;
+                        _restedCellsCollection.Remove(yKey);
+                    }
                 }
+                rowsDeleted++;
+                lastRowDeleted = yPos;
             }
         }
+        
+        if (rowsDeleted == 0 || lastRowDeleted == 0) return;
+        
+        var keyValuePairsAbove = _restedCellsCollection.ToList().FindAll(k => k.Key.y > lastRowDeleted);
+        keyValuePairsAbove = keyValuePairsAbove.OrderBy(k => k.Key.y).ToList();
+        
+
+        var distanceToDrop = rowsDeleted * 2;
+        foreach (var pair in keyValuePairsAbove)
+        {
+            pair.Deconstruct(out var oldKey, out var cellObject);
+            var decrementVector = new Vector3Int(0, distanceToDrop, 0);
+            var newKey = oldKey - decrementVector;
+            cellObject.transform.position -= decrementVector;
+            _restedCellsCollection[newKey] = cellObject;
+            _restedCellsCollection[oldKey] = null;
+            _restedCellsCollection.Remove(oldKey);
+        }
+    }
+
+    private void DropUpperCells()
+    {
+        
     }
 }
