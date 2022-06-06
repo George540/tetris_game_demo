@@ -10,25 +10,25 @@ public class InputSystem : MonoBehaviour
     // ReSharper disable once UnusedMember.Global
     public void OnMoveRight(InputAction.CallbackContext context)
     {
-        if (_gameManager.CurrentTetromino == null || !context.performed) return;
+        if (_gameManager.ActiveTetromino == null || !context.performed) return;
         
-        var tetromino = _gameManager.CurrentTetromino;
+        var tetromino = _gameManager.ActiveTetromino;
         tetromino.MoveRight(_gameManager.MoveDistance);
     }
     
     // ReSharper disable once UnusedMember.Global
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
-        if (_gameManager.CurrentTetromino == null || !context.performed) return;
+        if (_gameManager.ActiveTetromino == null || !context.performed) return;
 
-        var tetromino = _gameManager.CurrentTetromino;
+        var tetromino = _gameManager.ActiveTetromino;
         tetromino.MoveLeft(_gameManager.MoveDistance);
     }
 
     // ReSharper disable once UnusedMember.Global
     public void OnDropFaster(InputAction.CallbackContext context)
     {
-        if (_gameManager.CurrentTetromino == null) return;
+        if (_gameManager.ActiveTetromino == null) return;
 
         if (context.performed)
         {
@@ -44,10 +44,10 @@ public class InputSystem : MonoBehaviour
     // ReSharper disable once UnusedMember.Global
     public void OnRotate(InputAction.CallbackContext context)
     {
-        if (_gameManager.CurrentTetromino == null) return;
+        if (_gameManager.ActiveTetromino == null) return;
         if (context.performed)
         {
-            var tetromino = _gameManager.CurrentTetromino;
+            var tetromino = _gameManager.ActiveTetromino;
             tetromino.Rotate();
         }
     }

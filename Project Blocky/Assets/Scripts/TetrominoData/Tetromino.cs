@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -7,9 +8,10 @@ public class Tetromino : MonoBehaviour
     
     // Start is called before the first frame update
     private Vector3Int TetrominoPosition { get; set; }
-    public TetrominoData _data;
+    private TetrominoData _data;
     private Transform[] _cellTransforms;
     private bool _isRested;
+    // ReSharper disable once ConvertToAutoProperty
     public bool IsRested => _isRested;
 
     public void Initialize(GameManager manager, TetrominoData data, Vector3Int startPos)
@@ -28,6 +30,8 @@ public class Tetromino : MonoBehaviour
 
     public void DropTetromino(int dropDistance)
     {
+        if (_data == null) return;
+        
         if (_cellTransforms.Any(c => HasNeighbouringDownCell(c, dropDistance)) ||
             _cellTransforms.ToList().Any(c => c.position.y <= Data.BottomWallBoundary))
         {
@@ -108,8 +112,7 @@ public class Tetromino : MonoBehaviour
 
         _cellTransforms = null;
         _gameManager.RestedCellsSystem.EraseRows(yPos);
-        _gameManager.CreateTetromino();
-        Destroy(gameObject);
+        //_gameManager.CreateTetromino();
     }
 
     private void UpdateTransform()

@@ -4,40 +4,37 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private RestedCells _restedCellsSystem;
+    [SerializeField] private WaitlistBoard _waitlistBoard;
     
     [SerializeField, Min(0)] private int _moveDistance;
     [SerializeField] private Vector3Int _startPosition;
     [SerializeField] private float _timerCountdown;
-    [SerializeField] private Tetromino _baseTetrominoPrefab;
-    [SerializeField] private TetrominoData[] _tetrominoesData;
-    private Tetromino _currentTetromino;
+    [SerializeField] private Tetromino _activeTetromino;
     private float _moveTimeInterval;
 
     public RestedCells RestedCellsSystem => _restedCellsSystem;
-    public Tetromino CurrentTetromino => _currentTetromino;
+    public Tetromino ActiveTetromino => _activeTetromino;
     public int MoveDistance => _moveDistance;
 
     private void Start()
     {
         _timerCountdown = _moveTimeInterval;
         _moveTimeInterval = Data.SlowMoveTimeDistance;
-        CreateTetromino();
     }
 
-    public void CreateTetromino()
+    public void CreateTetromino(TetrominoData _data)
     {
-        var choice = Random.Range(0, _tetrominoesData.Length);
-        _currentTetromino = Instantiate(_baseTetrominoPrefab, _startPosition, Quaternion.identity);
-        _currentTetromino.Initialize(this, _tetrominoesData[choice], _startPosition);
+        var tetrominoTransform = _activeTetromino.transform;
+        tetrominoTransform.position = _startPosition;
+        tetrominoTransform.rotation = Quaternion.identity;
+        _activeTetromino.Initialize(this, _data, _startPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_currentTetromino == null)
-        {
-            CreateTetromino();
-        }
+        if (_activeTetromino == null) return;
+        
         ChangeMoveTimeInterval();
         UpdateTimer();
     }
@@ -45,9 +42,9 @@ public class GameManager : MonoBehaviour
     {
         if (_timerCountdown < 0)
         {
-            if (_currentTetromino != null && !_currentTetromino.IsRested)
+            if (_activeTetromino != null && !_activeTetromino.IsRested)
             {
-                _currentTetromino.DropTetromino(_moveDistance);
+                _activeTetromino.DropTetromino(_moveDistance);
             }
             _timerCountdown = _moveTimeInterval;
         }
