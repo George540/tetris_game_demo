@@ -6,7 +6,7 @@ public class Tetromino : MonoBehaviour
     private GameManager _gameManager;
     
     // Start is called before the first frame update
-    public Vector3Int TetrominoPosition { get; set; }
+    private Vector3Int TetrominoPosition { get; set; }
     public TetrominoData _data;
     private Transform[] _cellTransforms;
     private bool _isRested;
@@ -67,14 +67,30 @@ public class Tetromino : MonoBehaviour
 
     public void Rotate()
     {
-        if (_data._hasRotation)
+        if (!_data._hasRotation) return;
+        
+        transform.Rotate(Vector3.forward, 90f);
+        if (_cellTransforms.Any(c =>
+            _gameManager.RestedCellsSystem.RestedCellsCollection.ContainsKey(Vector3Int.FloorToInt(c.position))))
         {
-            transform.Rotate(Vector3.forward, 90f);
-            foreach (var cell in _cellTransforms)
-            {
-                cell.Rotate(Vector3.back, 90f);
-            }
+            transform.Rotate(Vector3.back, 90f);
+            return;
         }
+        foreach (var cell in _cellTransforms)
+        {
+            cell.Rotate(Vector3.back, 90f);
+        }
+
+        if (_cellTransforms.Any(c => c.position.x < Data.LeftWallBoundary))
+        {
+            TetrominoPosition += new Vector3Int(2, 0, 0);
+        }
+        else if (_cellTransforms.Any(c => c.position.x > Data.RightWallBoundary))
+        {
+            TetrominoPosition -= new Vector3Int(2, 0, 0);
+        }
+
+        UpdateTransform();
     }
 
     private void RestTetromino()

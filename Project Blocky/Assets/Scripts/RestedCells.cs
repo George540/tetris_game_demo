@@ -26,7 +26,7 @@ public class RestedCells : MonoBehaviour
         var uniqueYPos = yPositions.ToList().Distinct().OrderBy(x => x).ToList();
 
         var rowsDeleted = 0;
-        var lastRowDeleted = 0;
+        var lastRowDeleted = uniqueYPos.Last();
         foreach (var yPos in uniqueYPos)
         {
             var yKeys = _restedCellsCollection.Keys.ToList().FindAll(k => k.y == yPos);
@@ -41,7 +41,6 @@ public class RestedCells : MonoBehaviour
                     }
                 }
                 rowsDeleted++;
-                lastRowDeleted = yPos;
             }
         }
         
