@@ -14,6 +14,11 @@ public class Tetromino : MonoBehaviour
     // ReSharper disable once ConvertToAutoProperty
     public bool IsRested => _isRested;
 
+    public bool HasData()
+    {
+        return _data != null;
+    }
+    
     public void Initialize(GameManager manager, TetrominoData data, Vector3Int startPos)
     {
         _gameManager = manager;
@@ -110,9 +115,10 @@ public class Tetromino : MonoBehaviour
             i++;
         }
 
+        _data = null;
         _cellTransforms = null;
         _gameManager.RestedCellsSystem.EraseRows(yPos);
-        //_gameManager.CreateTetromino();
+        _gameManager.CreateTetromino(_gameManager.GetNextTetromino());
     }
 
     private void UpdateTransform()

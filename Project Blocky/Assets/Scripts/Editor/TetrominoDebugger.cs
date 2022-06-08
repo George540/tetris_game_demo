@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -5,7 +6,9 @@ using UnityEngine.UIElements;
 public class TetrominoDebugger : EditorWindow
 {
     private WaitlistBoard _waitlistBoard;
-    
+
+    private VisualElement _root;
+    private VisualElement _buttonRoot;
     private Button _tetrominoI;
     private Button _tetrominoJ;
     private Button _tetrominoL;
@@ -13,10 +16,9 @@ public class TetrominoDebugger : EditorWindow
     private Button _tetrominoS;
     private Button _tetrominoT;
     private Button _tetrominoZ;
-
     private Button _eraseQueueButton;
-    
-    
+
+
     [MenuItem("Debug/Tetromino Debugger _%#D")]
     public static void ShowWindow()
     {
@@ -33,32 +35,32 @@ public class TetrominoDebugger : EditorWindow
         _waitlistBoard = FindObjectOfType<WaitlistBoard>();
         
         // Each editor window contains a root VisualElement object
-        var root = rootVisualElement;
+        _root = rootVisualElement;
 
-        var buttonRoot = rootVisualElement.Q("TetrominoButtonsRoot");
+        _buttonRoot = _root.Q("TetrominoButtonsRoot");
 
-        _tetrominoI = buttonRoot.Q<Button>("ButtonI");
+        _tetrominoI = _buttonRoot.Q<Button>("ButtonI");
         _tetrominoI.clicked += OnButtonIPressed;
         
-        _tetrominoJ = buttonRoot.Q<Button>("ButtonJ");
+        _tetrominoJ = _buttonRoot.Q<Button>("ButtonJ");
         _tetrominoJ.clicked += OnButtonJPressed;
         
-        _tetrominoL = buttonRoot.Q<Button>("ButtonL");
+        _tetrominoL = _buttonRoot.Q<Button>("ButtonL");
         _tetrominoL.clicked += OnButtonLPressed;
         
-        _tetrominoO = buttonRoot.Q<Button>("ButtonO");
+        _tetrominoO = _buttonRoot.Q<Button>("ButtonO");
         _tetrominoO.clicked += OnButtonOPressed;
         
-        _tetrominoS = buttonRoot.Q<Button>("ButtonS");
+        _tetrominoS = _buttonRoot.Q<Button>("ButtonS");
         _tetrominoS.clicked += OnButtonSPressed;
         
-        _tetrominoT = buttonRoot.Q<Button>("ButtonT");
+        _tetrominoT = _buttonRoot.Q<Button>("ButtonT");
         _tetrominoT.clicked += OnButtonTPressed;
         
-        _tetrominoZ = buttonRoot.Q<Button>("ButtonZ");
+        _tetrominoZ = _buttonRoot.Q<Button>("ButtonZ");
         _tetrominoZ.clicked += OnButtonZPressed;
 
-        _eraseQueueButton = buttonRoot.Q<Button>("EraseQueue");
+        _eraseQueueButton = _buttonRoot.Q<Button>("EraseQueue");
         _eraseQueueButton.clicked += OnEraseQueue;
 
 
@@ -88,37 +90,44 @@ public class TetrominoDebugger : EditorWindow
 
     private void OnButtonIPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(0));
+        var data = _waitlistBoard.GetTetrominoData(0);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
     
     private void OnButtonJPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(1));
+        var data = _waitlistBoard.GetTetrominoData(1);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
     
     private void OnButtonLPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(2));
+        var data = _waitlistBoard.GetTetrominoData(2);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
     
     private void OnButtonOPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(3));
+        var data = _waitlistBoard.GetTetrominoData(3);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
     
     private void OnButtonSPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(4));
+        var data = _waitlistBoard.GetTetrominoData(4);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
     
     private void OnButtonTPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(5));
+        var data = _waitlistBoard.GetTetrominoData(5);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
     
     private void OnButtonZPressed()
     {
-        _waitlistBoard.AddTetrominoOnWaitingList(_waitlistBoard.GetTetrominoData(6));
+        var data = _waitlistBoard.GetTetrominoData(6);
+        _waitlistBoard.AddTetrominoOnWaitingList(data);
     }
 
     private void OnEraseQueue()

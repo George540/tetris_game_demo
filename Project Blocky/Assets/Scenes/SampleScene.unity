@@ -1156,6 +1156,7 @@ MonoBehaviour:
   _tetrominoDisplays:
   - {fileID: 1324118690}
   - {fileID: 1116228393}
+  _displayData: []
 --- !u!4 &576126703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4607860201869773052, guid: d7c814c61c08f124f88e6c64781a95b4, type: 3}
@@ -3099,6 +3100,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4607860201869773052, guid: d7c814c61c08f124f88e6c64781a95b4, type: 3}
   m_PrefabInstance: {fileID: 1251908197}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1501818299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7054196730689949931, guid: 3365d70b8b0c773469fa649d5ded71af, type: 3}
+  m_PrefabInstance: {fileID: 551377247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208732f4c43fae94db8f4fd3c88b4122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1529007070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3859,11 +3871,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputSystem: {fileID: 1829510253}
   _restedCellsSystem: {fileID: 263585350}
-  _waitlistBoard: {fileID: 0}
+  _waitlistBoard: {fileID: 553559251}
   _moveDistance: 2
   _startPosition: {x: -1, y: 17, z: 0}
   _timerCountdown: 0
-  _activeTetromino: {fileID: 0}
+  _activeTetromino: {fileID: 1501818299}
 --- !u!4 &1829510252
 Transform:
   m_ObjectHideFlags: 0

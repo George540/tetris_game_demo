@@ -1,6 +1,6 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <ui:VisualElement name="TetrominosRoot" style="margin-left: 2px; margin-right: 0; margin-top: 0;">
-        <ui:Label text="Tetromino Data Selection" display-tooltip-when-elided="true" name="TetrominoButtonsLabel" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; padding-left: 2px; -unity-text-align: upper-center; -unity-font-style: bold;" />
+        <ui:Label text="Tetromino Data Selection" display-tooltip-when-elided="true" name="TetrominoButtonsLabel" style="margin-left: 2px; margin-right: 2px; margin-top: 3px; margin-bottom: 3px; padding-left: 2px; -unity-text-align: upper-center; -unity-font-style: bold;" />
         <ui:VisualElement name="TetrominoButtonsRoot">
             <ui:Button text="I" display-tooltip-when-elided="true" name="ButtonI" style="flex-grow: 1;" />
             <ui:Button text="J" display-tooltip-when-elided="true" name="ButtonJ" style="flex-grow: 1;" />
@@ -9,6 +9,7 @@
             <ui:Button text="S" display-tooltip-when-elided="true" name="ButtonS" style="flex-grow: 1;" />
             <ui:Button text="T" display-tooltip-when-elided="true" name="ButtonT" style="flex-grow: 1;" />
             <ui:Button text="Z" display-tooltip-when-elided="true" name="ButtonZ" style="flex-grow: 1;" />
+            <ui:Button text="Erase Queue" display-tooltip-when-elided="true" name="EraseQueue" style="padding-top: 6px; padding-bottom: 6px; margin-left: 3px; margin-right: 3px; margin-top: 6px; margin-bottom: 6px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

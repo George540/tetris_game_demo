@@ -22,13 +22,16 @@ public class TetrominoDisplay : MonoBehaviour
         }
     }
 
-    public void RemoveData()
+    public TetrominoData RemoveData()
     {
         for (var i = 0; i < _cellTransforms.Length; i++)
         {
             Destroy(_cellTransforms[i].gameObject);
             _cellTransforms[i] = null;
-            _data = null;
         }
+
+        var getData = _data;
+        _data = null;
+        return getData;
     }
 }

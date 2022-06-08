@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
         _moveTimeInterval = Data.SlowMoveTimeDistance;
     }
 
+    public TetrominoData GetNextTetromino()
+    {
+        return _waitlistBoard.GetNextTetromino();
+    }
+    
     public void CreateTetromino(TetrominoData _data)
     {
         var tetrominoTransform = _activeTetromino.transform;
